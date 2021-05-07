@@ -1,4 +1,4 @@
-# A review of paleoherbivory across space and time #
+# Dicot fossil leaves from the Cretaceous-Pleistocene record the importance of ecological influence on plant-insect interactions #
 **Team members:** Ellen D. Currano<sup>a,b </sup>, Lauren E. Azevedo-Schmidt<sup>a</sup>, S. Augusta Maccracken<sup>c</sup>, and Anshuman Swain<sup>d</sup>
 
 <sup>a</sup> Department of Botany, University of Wyoming, 1000 E. University Ave, Laramie, WY 82071;
