@@ -1,4 +1,4 @@
-# An exploration of ecological patterns in plant-insect herbivore associations during the Age of Angiosperms #
+# Scars on fossil leaves: An exploration of ecological patterns in plant–insect herbivore associations during the Age of Angiosperms #
 **Team members:** Ellen D. Currano<sup>a,b </sup>, Lauren E. Azevedo-Schmidt<sup>a</sup>, S. Augusta Maccracken<sup>c,d</sup>, and Anshuman Swain<sup>e</sup>
 
 <sup>a</sup> Department of Botany, University of Wyoming, 1000 E. University Ave, Laramie, WY 82071;
