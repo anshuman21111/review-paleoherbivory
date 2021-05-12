@@ -1,0 +1,67 @@
+Flora,Abbreviation,Region,Latitude,Age,s1,s2,DTs.at.300,NMDS.scale
+Bernasso,Bern,Eurasia,Mid-N,Pleistocene,-0.070102675,0.177605957,32.35,3.234844376
+Willershausen,Will,Eurasia,Mid-N,Pliocene,-0.247387496,0.010481894,28.36,2.835782069
+Berga,Berg,Eurasia,Mid-N,Pliocene,-0.006849581,0.165966993,19.8,1.979868891
+Hindon Maar,HiMa,New Zealand,Mid-S,Miocene,-0.596785333,0.173678172,61.85,6.185
+Hredavatn-StafholtFm,HrSt,Iceland,High-N,Miocene,0.045156049,-0.034624536,14.60366851,1.460366851
+Skardsstrond-MokollsdalurFm,SkMo,Iceland,High-N,Miocene,0.202219895,0.041001524,11.35977734,1.135977734
+Trollatunga-GautshamarFm.,TrGa,Iceland,High-N,Miocene,0.638809796,-0.004875164,16.63350939,1.663350939
+Brjanslaekur-Selja Fm,BrSe,Iceland,High-N,Miocene,0.195499332,-0.152952071,16.16396828,1.616396828
+"Delta Sandy Horizon, Most Basin",DSH,Eurasia,Mid-N,Miocene,0.025272867,-0.004660677,22.26,2.22617
+"Lake Clayey Horizon, Most Basin",LCH,Eurasia,Mid-N,Miocene,0.230055685,0.26047831,15.88,1.58846641
+Mush,Mush,Africa,Low,Miocene,-0.039968079,0.343980347,21.41,2.14146
+Rott,Rott,Eurasia,Mid-N,Oligocene,0.143769399,0.139431003,19.77,1.977
+Enspel,Ensp,Eurasia,Mid-N,Oligocene,-0.057363486,-0.143312209,18.63,1.862509348
+LV3,LV3,Eurasia,Mid-N,Oligocene,-0.007905912,-0.431261611,17.4,1.74
+Quegstein,Queg,Eurasia,Mid-N,Oligocene,0.320864369,0.044814037,11.84,1.184
+Chilga,Chil,Africa,Low,Oligocene,-0.013622048,0.313545281,25.17,2.517142359
+Markam Basin MK-1,MK-1,Eurasia,Mid-N,Oligocene,0.054807704,-0.182642196,14.58,1.458
+Aspelintoppen,Asp,Spitsbergen,High-N,Unknown Paleogene,0.234081602,-0.02593174,16.825,1.682469651
+Renardodden,Rena,Spitsbergen,High-N,Eocene-Oligocene,0.147032366,0.065386865,15.912,1.591231081
+Florissant,Flor,North America,Mid-N,Eocene,-0.335604521,-0.33281193,NA,1.5
+Markam Basin MK-3,MK-3,Eurasia,Mid-N,Eocene,-0.149806613,-0.060349459,20.62,2.062057
+Profen,Prof,Eurasia,Mid-N,Eocene,0.495170076,0.214907384,12.57,1.257
+Eckfeld,Eck,Eurasia,Mid-N,Eocene,0.172268779,0.194489409,25.064,2.506377264
+Bonanza,Bon,North America,Mid-N,Eocene,0.102838061,0.063862698,18.197,1.8197
+Messel,Mess,Eurasia,Mid-N,Eocene,0.06660737,0.285118874,33.168,3.316784312
+Republic,Rep,North America,Mid-N,Eocene,-0.303434224,0.055401464,24.4,2.44
+Parachute Creek,PaCr,North America,Mid-N,Eocene,-0.257793396,-0.236833953,NA,1.5
+Kissinger Lakes (WRE),WRE,North America,Mid-N,Eocene,0.353907786,0.234689546,18.13,1.813454624
+Laguna del Hunco 6,LH6,Patagonia,Mid-S,Eocene,-0.074005457,-0.001025051,26.146,2.6146
+Laguna del Hunco 13,LH13,Patagonia,Mid-S,Eocene,-0.073165921,0.046808394,24.769,2.4769
+Laguna del Hunco 2,LH2,Patagonia,Mid-S,Eocene,-0.164492187,0.046047967,29.133,2.9133
+Laguna del Hunco 4,LH4,Patagonia,Mid-S,Eocene,0.201100993,-0.001900396,18.832,1.8832
+Wind River Interior,WRI,North America,Mid-N,Eocene,-0.224449248,-0.047700164,23.12,2.31163997
+Fifteenmile Creek,15MC,North America,Mid-N,Eocene,-0.396739713,-0.001170457,28.8,2.88
+PN,PN,North America,Mid-N,Eocene,-0.307802203,-0.053275591,22.69,2.26944
+Sourdough,Sd,North America,Mid-N,Eocene,-0.059669898,-0.009264391,15.779,1.577926721
+Cool Period,CP,North America,Mid-N,Eocene,-0.134084978,0.017316511,19.39,1.93918
+South Fork Elk Creek,EC,North America,Mid-N,Eocene,-0.025560332,-0.09038006,19.13,1.913
+Hubble Bubble,HB,North America,Mid-N,Eocene,-0.437349514,0.095958989,29.81,2.981
+Chickaloon,Chic,Alaska,High-N,Eocene,0.812628987,-0.184085315,5.947877778,0.594787778
+Hanna Basin Level E,HBE,North America,Mid-N,Eocene,0.104557403,-0.192137615,17.51,1.751
+King George Island,KGI,Antarctica,High-S,Eocene,0.484179111,-0.038507676,NA,1.5
+Seymour Island,SI,Antarctica,High-S,Paleocene,0.96076573,0.005433483,NA,1.5
+Hanna Basin Level C,HBC,North America,Mid-N,Paleocene,0.015202995,-0.190257046,22,2.2
+Daiye Spa,DS,North America,Mid-N,Paleocene,-0.20031992,-0.006048112,26.0162,2.60162
+Dead Platypus,DP,North America,Mid-N,Paleocene,-0.170349679,-0.017079035,21.38,2.138
+Clarkforkian,Cf,North America,Mid-N,Paleocene,-0.00174905,-0.124556279,18.207,1.8207
+Lur'd Leaves,LL,North America,Mid-N,Paleocene,0.306602343,-0.142458054,15.4424,1.54424
+Cerrej—n,Cer,Tropical South America,Low,Paleocene,-0.321848255,-0.010129117,23.7,2.369936338
+Skeleton Coast,SC,North America,Mid-N,Paleocene,-0.06664994,-0.437656309,14.41,1.441
+Persites Paradise,PP,North America,Mid-N,Paleocene,-0.104890315,-0.284101933,15.6526,1.56526
+Kevin's Jerky,KJ,North America,Mid-N,Paleocene,-0.15516242,0.36495136,17.2526,1.72526
+Haz-Mat,HM,North America,Mid-N,Paleocene,-0.137507296,0.306797912,14.6688,1.46688
+Menat,Men,North America,Mid-N,Paleocene,0.01095399,0.053572985,22.69,2.269
+Las Flores,LasF,Patagonia,Mid-S,Paleocene,-0.3715086,0.036573052,32.08,3.208
+Palacio de los Loros 2,PL2,Patagonia,Mid-S,Paleocene,-0.519359957,0.084220815,29.89,2.989
+Castle Rock lower layer,CR,North America,Mid-N,Paleocene,0.704633605,0.080568976,10.58,1.058
+Palacio de los Loros 1,PL1,Patagonia,Mid-S,Paleocene,-0.381113903,0.115471737,23.57,2.357
+Mexican Hat,MH,North America,Mid-N,Paleocene,-0.260810187,-0.135686514,21.046,2.1046
+Pyramid Butte,PB,North America,Mid-N,Paleocene,0.179344445,-0.191005618,14.07,1.407
+Firkanten,Firk,Spitsbergen,High-N,Paleocene,0.094648779,0.090260732,16.768,1.676750472
+Battleship,BS,North America,Mid-N,Cretaceous,-0.057047595,-0.213876618,26.7,2.670039879
+Dean Street,DS,North America,Mid-N,Cretaceous,-0.066359925,-0.060681927,24.55,2.455
+Lefipan East,LefE,Patagonia,Mid-S,Cretaceous,-0.453854808,0.115533764,31.4,3.14
+Somebody's Garden,SG,North America,Mid-N,Cretaceous,-0.091183062,-0.128945797,18.9,1.89
+Luten's 4H Hadrosaur,L4H,North America,Mid-N,Cretaceous,0.040678216,-0.072171811,22.28,2.228
