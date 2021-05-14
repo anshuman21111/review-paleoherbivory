@@ -1,0 +1,906 @@
+---
+title: "LME"
+date: "3/2/2021"
+output: html_document
+---
+```{r}
+#MixedEffectsModel
+
+library(ggplot2)
+library(bootstrap)
+library(fossil)
+library(iNEXT)
+library(plyr)
+library(lme4)
+library(lmerTest)
+library(rsq)
+
+setwd("/Users/gussiemaccracken/Desktop/Review Paper- Ellen Lauren Anshuman")
+
+x = read.csv("Full database.csv", header=T)
+head(x)
+summary(x)
+
+x$DTs.at.300<-as.numeric(x$DTs.at.300)
+x$MAT.C<-as.numeric(x$MAT.C)
+x$MAP.mm.yr<-as.numeric(x$MAP.mm.yr)
+x$PubDate<-as.numeric(x$PubDate)
+x$Shannon<-as.numeric(x$Shannon)
+x$Pielou.s.J<-as.numeric(x$Pielou.s.J)
+x$Plant.div.300.leaves<-as.numeric(x$Plant.div.300.leaves)
+x$Spec.DTs.at.300<-as.numeric(x$Spec.DTs.at.300)
+x$Mine.DTs.at.300<-as.numeric(x$Mine.DTs.at.300)
+x$Gall.DTs.at.300<-as.numeric(x$Gall.DTs.at.300)
+
+#SINGLE LINNEAR MODELS
+
+#1 How does MAT affect DT richness?
+#Plot the data
+hist(x$DTs.at.300)
+plot(x$MAT.C,x$DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual Temperature (C)", ylab="DTs", bty="l")
+
+#Fit a simple linear model to explore the relationship between MAT and DTs
+lmod1<-glm(DTs.at.300~MAT.C, family=gaussian(link="identity"),dat=x)
+coef(lmod1)
+abline(lmod1)
+
+#Review the results
+summary(lmod1) 
+rsq(lmod1)
+
+# Significant
+
+```
+
+
+```{r}
+
+
+#2 How does precipitation affect DT richness?
+plot(x$MAP.mm.yr,x$DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual Precip (C)", ylab="DTs", bty="l")
+lmod2<-glm(DTs.at.300~MAP.mm.yr, family=gaussian(link="identity"),dat=x)
+coef(lmod2)
+abline(lmod2)
+summary(lmod2) 
+#Not significant
+
+```
+
+```{r}
+
+
+#3 How does date of publication affect DT richness?
+plot(x$PubDate,x$DTs.at.300, pch=21, bg="#a6808c", 
+     xlab="Publication Date", ylab="DTs", bty="l")
+lmod3<-glm(DTs.at.300~PubDate, family=gaussian(link="identity"),dat=x)
+coef(lmod3)
+summary(lmod3) 
+#Not significant
+
+```
+```{r}
+
+#4 How does geologic age affect DT richness?
+plot(x$Age,x$DTs.at.300, pch=21, bg="#177e89", 
+     xlab="Age (MY)", ylab="Damage Types", bty="l")
+lmod4<-glm(DTs.at.300~Age, family=gaussian(link="identity"),dat=x)
+coef(lmod4)
+summary(lmod4) 
+#Not Significant
+
+```
+
+```{r}
+
+#5 How does plant diversity (Shannon's) affect DT richness?
+plot(x$Shannon,x$DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Shannon", ylab="DTs", bty="l")
+lmod5<-glm(DTs.at.300~Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod5)
+abline(lmod5)
+summary(lmod5) 
+rsq(lmod5,adj=TRUE)
+# Significant
+
+```
+
+```{r}
+
+
+#6 How does plant diversity (Pielou's) affect DT richness?
+plot(x$Pielou.s.J,x$DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Pielou", ylab="DTs", bty="l")
+lmod6<-glm(DTs.at.300~Pielou.s.J, family=gaussian(link="identity"),dat=x)
+coef(lmod6)
+abline(lmod6)
+summary(lmod6) 
+#Not significant
+
+```
+
+```{r}
+
+
+#7 How does plant diversity (at 300) affect DT richness?
+plot(x$Plant.div.300.leaves,x$DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant div at 300", ylab="DTs", bty="l")
+lmod7<-glm(DTs.at.300~Plant.div.300.leaves, family=gaussian(link="identity"),dat=x)
+coef(lmod7)
+abline(lmod7)
+summary(lmod7) 
+#Not significant
+
+```
+
+```{r}
+
+
+
+#8 How does MAT affect specialist DT richness?
+hist(x$Spec.DTs.at.300)
+plot(x$MAT.C,x$Spec.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual Temperature (C)", ylab="Spec DTs", bty="l")
+lmod8<-glm(Spec.DTs.at.300~MAT.C, family=gaussian(link="identity"),dat=x)
+coef(lmod8)
+abline(lmod8)
+summary(lmod8) 
+rsq(lmod8,adj=TRUE)
+#Significant
+
+```
+
+```{r}
+
+
+
+#9 How does MAP affect Spec DT richness?
+hist(x$Spec.DTs.at.300)
+plot(x$MAP.mm.yr,x$Spec.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual precip (mm/yr)", ylab="Spec DTs", bty="l")
+lmod10<-glm(Spec.DTs.at.300~MAP.mm.yr, family=gaussian(link="identity"),dat=x)
+coef(lmod10)
+abline(lmod10)
+summary(lmod10) 
+#Not significant
+
+```
+
+```{r}
+
+
+
+
+#10 How does date of publication affect SPEC DT richness?
+plot(x$PubDate,x$Spec.DTs.at.300, pch=21, bg="#a6808c", 
+     xlab="Publication Date", ylab="DTs", bty="l")
+lmod3<-glm(Spec.DTs.at.300~PubDate, family=gaussian(link="identity"),dat=x)
+coef(lmod3)
+summary(lmod3) 
+#Not significant
+
+```
+```{r}
+
+
+#11 How does geologic age affect SPEC DT richness?
+plot(x$Age,x$Spec.DTs.at.300, pch=21, bg="#177e89", 
+     xlab="Age (MY)", ylab="Damage Types", bty="l")
+lmod4<-glm(Spec.DTs.at.300~Age, family=gaussian(link="identity"),dat=x)
+coef(lmod4)
+summary(lmod4) 
+#Not Significant
+
+```
+
+```{r}
+
+#12 How does plant diversity (Shannon's) affect SPEC DT richness?
+plot(x$Shannon,x$Spec.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Shannon", ylab="DTs", bty="l")
+lmod5<-glm(Spec.DTs.at.300~Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod5)
+abline(lmod5)
+summary(lmod5) 
+rsq(lmod5,adj=TRUE)
+#Not Significant
+
+```
+
+```{r}
+
+#13 How does plant diversity (Pielou's) affect SPEC DT richness?
+plot(x$Pielou.s.J,x$Spec.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Pielou", ylab="DTs", bty="l")
+lmod6<-glm(Spec.DTs.at.300~Pielou.s.J, family=gaussian(link="identity"),dat=x)
+coef(lmod6)
+abline(lmod6)
+summary(lmod6) 
+#Not significant
+
+```
+
+```{r}
+
+#14 How does plant diversity (at 300) affect SPEC DT richness?
+plot(x$Plant.div.300.leaves,x$Spec.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant div at 300", ylab="DTs", bty="l")
+lmod7<-glm(Spec.DTs.at.300~Plant.div.300.leaves, family=gaussian(link="identity"),dat=x)
+coef(lmod7)
+abline(lmod7)
+summary(lmod7) 
+#Not significant
+
+```
+
+```{r}
+
+
+#15 How does MAT affect Galling DT richness?
+hist(x$Gall.DTs.at.300)
+plot(x$MAT.C,x$Gall.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual T", ylab="Gall DTs", bty="l")
+lmod12<-glm(Gall.DTs.at.300~MAT.C, family=gaussian(link="identity"),dat=x)
+coef(lmod12)
+abline(lmod12)
+summary(lmod12) 
+rsq(lmod12,adj=TRUE)
+#Significant
+```
+
+```{r}
+
+
+
+#16 How does MAP affect GALL DT richness?
+hist(x$Gall.DTs.at.300)
+plot(x$MAP.mm.yr,x$Gall.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual Temperature (C)", ylab="Gall DTs", bty="l")
+lmod9<-glm(Gall.DTs.at.300~MAP.mm.yr, family=gaussian(link="identity"),dat=x)
+coef(lmod9)
+abline(lmod9)
+summary(lmod9) 
+#Not Significant
+
+```
+
+```{r}
+
+
+
+#17 How does date of publication affect GALL DT richness?
+plot(x$PubDate,x$Gall.DTs.at.300, pch=21, bg="#a6808c", 
+     xlab="Publication Date", ylab="DTs", bty="l")
+lmod3<-glm(Gall.DTs.at.300~PubDate, family=gaussian(link="identity"),dat=x)
+coef(lmod3)
+summary(lmod3) 
+# Significant
+
+
+```
+```{r}
+
+#18 How does geologic age affect GALL DT richness?
+plot(x$Age,x$Gall.DTs.at.300, pch=21, bg="#177e89", 
+     xlab="Age (MY)", ylab="Damage Types", bty="l")
+lmod4<-glm(Gall.DTs.at.300~Age, family=gaussian(link="identity"),dat=x)
+coef(lmod4)
+summary(lmod4) 
+#Not Significant
+
+```
+
+```{r}
+
+#19 How does plant diversity (Shannon's) affect GALL DT richness?
+plot(x$Shannon,x$Gall.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Shannon", ylab="DTs", bty="l")
+lmod5<-glm(Gall.DTs.at.300~Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod5)
+abline(lmod5)
+summary(lmod5) 
+rsq(lmod5,adj=TRUE)
+#significant
+
+```
+
+```{r}
+
+
+#20 How does plant diversity (Pielou's) affect GALL DT richness?
+plot(x$Pielou.s.J,x$Gall.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Pielou", ylab="DTs", bty="l")
+lmod6<-glm(Gall.DTs.at.300~Pielou.s.J, family=gaussian(link="identity"),dat=x)
+coef(lmod6)
+abline(lmod6)
+summary(lmod6) 
+#Not significant
+
+```
+
+```{r}
+
+#21 How does plant diversity (at 300) affect GALL DT richness?
+plot(x$Plant.div.300.leaves,x$Gall.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant div at 300", ylab="DTs", bty="l")
+lmod7<-glm(Gall.DTs.at.300~Plant.div.300.leaves, family=gaussian(link="identity"),dat=x)
+coef(lmod7)
+abline(lmod7)
+summary(lmod7) 
+#Not significant
+
+```
+
+```{r}
+
+#22 How does MAT affect Mining DT richness?
+hist(x$Mine.DTs.at.300)
+plot(x$MAT.C,x$Mine.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual T", ylab="Mine DTs", bty="l")
+lmod13<-glm(Mine.DTs.at.300~MAT.C, family=gaussian(link="identity"),dat=x)
+coef(lmod13)
+abline(lmod13)
+summary(lmod13) 
+rsq(lmod13,adj=TRUE)
+#Significant
+
+
+```
+
+
+```{r}
+
+
+#23 How does MAP affect mining MINE DT richness?
+hist(x$Mine.DTs.at.300)
+plot(x$MAP.mm.yr,x$Mine.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Mean Annual precip (mm/yr)", ylab="Mine DTs", bty="l")
+lmod10<-glm(Mine.DTs.at.300~MAP.mm.yr, family=gaussian(link="identity"),dat=x)
+coef(lmod10)
+abline(lmod10)
+summary(lmod10) 
+#Not significant
+```
+
+```{r}
+
+
+
+#24 How does date of publication affect MINE DT richness?
+plot(x$PubDate,x$Mine.DTs.at.300, pch=21, bg="#a6808c", 
+     xlab="Publication Date", ylab="DTs", bty="l")
+lmod3<-glm(Mine.DTs.at.300~PubDate, family=gaussian(link="identity"),dat=x)
+coef(lmod3)
+summary(lmod3) 
+#Not significant
+
+```
+```{r}
+
+
+#25 How does geologic age affect MINE DT richness?
+plot(x$Age,x$Mine.DTs.at.300, pch=21, bg="#177e89", 
+     xlab="Age (MY)", ylab="Damage Types", bty="l")
+lmod4<-glm(Mine.DTs.at.300~Age, family=gaussian(link="identity"),dat=x)
+coef(lmod4)
+summary(lmod4) 
+#Not Significant
+
+```
+
+```{r}
+
+
+
+#26 How does plant diversity (Shannon's) affect MINE DT richness?
+plot(x$Shannon,x$Mine.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Shannon", ylab="DTs", bty="l")
+lmod5<-glm(Mine.DTs.at.300~Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod5)
+abline(lmod5)
+summary(lmod5) 
+rsq(lmod5,adj=TRUE)
+#significant
+
+```
+
+```{r}
+
+
+#27 How does plant diversity (Pielou's) affect MINE DT richness?
+plot(x$Pielou.s.J,x$Mine.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant Div Pielou", ylab="DTs", bty="l")
+lmod6<-glm(Mine.DTs.at.300~Pielou.s.J, family=gaussian(link="identity"),dat=x)
+coef(lmod6)
+abline(lmod6)
+summary(lmod6) 
+#Not significant
+
+```
+
+```{r}
+
+#28 How does plant diversity (at 300) affect MINE DT richness?
+plot(x$Plant.div.300.leaves,x$Mine.DTs.at.300, pch=21, bg="lightblue", 
+     xlab="Plant div at 300", ylab="DTs", bty="l")
+lmod7<-glm(Mine.DTs.at.300~Plant.div.300.leaves, family=gaussian(link="identity"),dat=x)
+coef(lmod7)
+abline(lmod7)
+summary(lmod7) 
+#Not significant
+
+```
+
+```{r}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### MULT REGRESSION
+
+
+
+#1 How do MAT AND plant diversity (shannon) affect DTs?
+# Plot the data:
+hist(x$DTs.at.300)
+plot(x$MAT.C,x$Shannon, pch=21, bg="lightblue", xlab="MAT", ylab="Shannon", bty="l")
+
+#Fit a linear model that includes two predictors (temperature and Shannon).
+lmod13<-glm(DTs.at.300~MAT.C + Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod13)
+
+lmod13<-glm(DTs.at.300~MAT.C * Shannon, family=gaussian(link="identity"),dat=x)
+
+coef(lmod13)
+summary(lmod13) 
+#Significant
+
+
+```
+
+```{r}
+
+
+#2 How do temperature AND shannon affect SPEC DTs?
+# Plot the data:
+hist(x$Spec.DTs.at.300)
+plot(x$MAT.C,x$Shannon, pch=21, bg="lightblue", xlab="MAT", ylab="Shannon", bty="l")
+
+#Fit a linear model that includes two predictors (temperature and Shannon).
+lmod13<-glm(Spec.DTs.at.300~MAT.C + Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod13)
+
+lmod15<-glm(Spec.DTs.at.300~MAT.C * Shannon, family=gaussian(link="identity"),dat=x)
+
+coef(lmod15)
+summary(lmod15) 
+#Significant
+
+
+```
+
+```{r}
+
+#3 How do temperature AND shannon affect galling DTs?
+# Plot the data:
+hist(x$Gall.DTs.at.300)
+plot(x$MAT.C,x$Shannon, pch=21, bg="lightblue", xlab="MAT", ylab="Shannon", bty="l")
+
+#Fit a linear model that includes two predictors (temperature and Shannon).
+lmod13<-glm(Gall.DTs.at.300~MAT.C + Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod13)
+
+lmod16<-glm(Gall.DTs.at.300~MAT.C * Shannon, family=gaussian(link="identity"),dat=x)
+
+coef(lmod16)
+summary(lmod16) 
+#Not significant
+
+```
+
+```{r}
+
+#4 How do temperature AND shannon affect mining DTs?
+# Plot the data:
+hist(x$Mine.DTs.at.300)
+plot(x$MAT.C,x$Shannon, pch=21, bg="lightblue", xlab="MAT", ylab="Shannon", bty="l")
+
+#Fit a linear model that includes two predictors (temperature and Shannon).
+lmod13<-glm(Mine.DTs.at.300~MAT.C + Shannon, family=gaussian(link="identity"),dat=x)
+coef(lmod13)
+
+lmod17<-glm(Mine.DTs.at.300~MAT.C * Shannon, family=gaussian(link="identity"),dat=x)
+
+coef(lmod17)
+summary(lmod17) 
+#Significant
+
+plot(lmod17, which = 2)
+```
+
+```{r}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#MIXED MODELS
+
+# 1 DTs/MAT by dep
+lmod_slopes=lm(DTs.at.300~MAT.C +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(DTs.at.300~MAT.C+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(DTs.at.300~MAT.C+ (1|DepEnv) + (0+MAT.C|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+```
+
+
+```{r}
+
+# 2 DTs/MAT by dep
+lmod_slopes=lm(Spec.DTs.at.300~MAT.C +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Spec.DTs.at.300~MAT.C+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Spec.DTs.at.300~MAT.C+ (1|DepEnv) + (0+MAT.C|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+
+```{r}
+
+
+# 3 GallDTs/MAT by dep
+lmod_slopes=lm(Gall.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Gall.DTs.at.300~MAT.C +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Gall.DTs.at.300~MAT.C+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Gall.DTs.at.300~MAT.C+ (1|DepEnv) + (0+MAT.C|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+
+```{r}
+
+# 4 MineDTs/MAT by dep
+lmod_slopes=lm(Mine.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Mine.DTs.at.300~MAT.C +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Mine.DTs.at.300~MAT.C+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Mine.DTs.at.300~MAT.C+ (1|DepEnv) + (0+MAT.C|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+
+```{r}
+
+
+# 5 DTs/MAT by lat
+lmod_slopes=lm(DTs.at.300~x$MAT.C, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(DTs.at.300~x$MAT.C +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(DTs.at.300~x$MAT.C+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(DTs.at.300~x$MAT.C+ (1|Latitude) + (0+MAT.C|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+```{r}
+
+
+# 6 Spec DTs/MAT by lat
+lmod_slopes=lm(Spec.DTs.at.300~x$MAT.C, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Spec.DTs.at.300~x$MAT.C +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Spec.DTs.at.300~x$MAT.C+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Spec.DTs.at.300~x$MAT.C+ (1|Latitude) + (0+MAT.C|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+```{r}
+
+# 7 Gall damage/MAT by lat
+lmod_slopes=lm(Gall.DTs.at.300~MAT.C +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Gall.DTs.at.300~MAT.C+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Gall.DTs.at.300~MAT.C+ (1|Latitude) + (0+MAT.C|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+```{r}
+
+
+
+# 8 Mine damage/MAT by lat
+lmod_slopes=lm(Mine.DTs.at.300~MAT.C +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Mine.DTs.at.300~MAT.C+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Mine.DTs.at.300~MAT.C+ (1|Latitude) + (0+MAT.C|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+#Significant
+
+
+```
+
+```{r}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 9 DTs/Shan by dep
+lmod_slopes=lm(DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(DTs.at.300~Shannon +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(DTs.at.300~Shannon+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(DTs.at.300~Shannon+ (1|DepEnv) + (0+Shannon|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+```
+
+```{r}
+
+
+
+
+# 10 SPEC DTs/Shan by dep
+lmod_slopes=lm(Spec.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Spec.DTs.at.300~Shannon +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Spec.DTs.at.300~Shannon+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Spec.DTs.at.300~Shannon+ (1|DepEnv) + (0+Shannon|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+
+
+```
+
+```{r}
+
+
+
+
+# 11 Gall DTs/Shan by dep
+lmod_slopes=lm(Gall.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Gall.DTs.at.300~Shannon +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Gall.DTs.at.300~Shannon+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Gall.DTs.at.300~Shannon+ (1|DepEnv) + (0+Shannon|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+
+
+```
+
+```{r}
+
+# 12 MineDTs/Shan by dep
+lmod_slopes=lm(Mine.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Mine.DTs.at.300~Shannon +DepEnv, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Mine.DTs.at.300~Shannon+ (1|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Mine.DTs.at.300~Shannon+ (1|DepEnv) + (0+Shannon|DepEnv),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+
+
+```
+
+```{r}
+
+
+
+
+# 13 DTs/Shan by lat
+lmod_slopes=lm(DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(DTs.at.300~Shannon +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(DTs.at.300~Shannon+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(DTs.at.300~Shannon+ (1|Latitude) + (0+Shannon|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Significant
+
+
+```
+
+```{r}
+
+
+# 14 SPEC DTs/Shan by lat
+lmod_slopes=lm(Spec.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Spec.DTs.at.300~Shannon +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Spec.DTs.at.300~Shannon+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Spec.DTs.at.300~Shannon+ (1|Latitude) + (0+Shannon|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Significant
+
+
+```
+
+```{r}
+
+# 15 GALL DTs/Shan by lat
+lmod_slopes=lm(Gall.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Gall.DTs.at.300~Shannon +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Gall.DTs.at.300~Shannon+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Gall.DTs.at.300~Shannon+ (1|Latitude) + (0+Shannon|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+
+
+```
+
+```{r}
+
+# 16 MINE DTs/Shan by lat
+lmod_slopes=lm(Mine.DTs.at.300~Shannon, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lm(Mine.DTs.at.300~Shannon +Latitude, dat=x)
+summary(lmod_slopes)
+lmod_slopes=lmer(Mine.DTs.at.300~Shannon+ (1|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+lmod_slopes=lmer(Mine.DTs.at.300~Shannon+ (1|Latitude) + (0+Shannon|Latitude),dat=x)
+anova(lmod_slopes)
+summary(lmod_slopes)
+
+# Not Significant
+
+
+```
+
+```{r}
+
+
