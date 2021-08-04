@@ -23,6 +23,8 @@ c.LL <- drop_na(data[,c(3,39)])
 niche.HL <- drop_na(data[,c(3,34)])
 niche.LL <- drop_na(data[,c(3,35)])
 
+#Note that HL stands for higher trophic level (DTs) and LL for lower trophic level (plants).
+
 #Tukey's test for connectance across lat----
 conn.lm <- lm(connectance ~ epoch, data = conn)
 conn.av <- aov(conn.lm)
