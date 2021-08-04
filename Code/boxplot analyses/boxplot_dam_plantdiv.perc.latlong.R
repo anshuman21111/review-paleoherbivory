@@ -63,7 +63,7 @@ avgtotal.perc <- total.perc %>%
             sd.all = sd(perc.damage), #standard deviation
             count=n())
 
-#Bar graph Total %Dam total----
+#Boxplot: Total %Dam----
 total.perc$Latitude <- factor(total.perc$Latitude,
                                  levels = c("High-S","Mid-S","Low","Mid-N","High-N"))
 total.perc <- arrange(total.perc, Latitude)
@@ -109,7 +109,7 @@ avgtotal.div <- total.div %>%
             sd.all = sd(stand.dt), #standard deviation
             count=n())
 
-#Bar graph Total Damage Diversity----
+#Boxplot: Total Damage Diversity----
 total.div$Latitude <- factor(total.div$Latitude,
                              levels = c("High-S","Mid-S","Low","Mid-N","High-N"))
 total.div <- arrange(total.div, Latitude)
@@ -193,7 +193,7 @@ avghole <- HF.perc %>%
             sd.all = sd(perc.hole), #standard deviation
             count=n())
 
-#Bar graph Total Damage Diversity----
+#Boxplot: Total Damage Diversity----
 HF.perc$Latitude <- factor(HF.perc$Latitude,
                              levels = c("High-S","Mid-S","Low","Mid-N","High-N"))
 HF.perc <- arrange(HF.perc, Latitude)
