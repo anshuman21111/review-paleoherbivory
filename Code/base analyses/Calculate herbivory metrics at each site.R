@@ -14,7 +14,7 @@ cutoff <- 100 #cutoff for resampling data for a single species
 
 dataall   <- read.csv(inputfilename, header=T) #read in data
 datatable <- dataall[,2:ncol(dataall)]
-species   <- dataall[,1]
+species   <- as.factor(dataall[,1])
 
 ffg_data  <- matrix (ncol=max(ffg_def), nrow=nrow(datatable), data=0)
 for (i in 1:max(ffg_def)) ffg_data[,i]<-as.numeric(as.logical(rowSums(datatable[,ffg_def==i])))
