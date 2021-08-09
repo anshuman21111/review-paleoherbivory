@@ -1,16 +1,19 @@
-##Bootstrapped network property calculations
+##Calculation of network properties with bootstrapping at 300 leaves without replacement
 
-
-filenets = list.files(path="data/Localities_3/select", pattern="*.csv", full.names=T) #path to all site data
+#names of files -- put the location of the csv files here
+filenets = list.files(path="data/Localities_3/select", pattern="*.csv", full.names=T)
 filenets2 = list.files(path="data/Localities_3/select", pattern="*.csv", full.names=F)
 
+#seeding
 set.seed(1)
 
+#initializing lists to measure properties and their variances
 networklevlist=NULL
 networklevmean=NULL
 networklevelvar=NULL
 
 library(Rfast)
+library(bipartite)
 
 for (i in 1:length(filenets)){
   nam=paste(filenets[i])
@@ -20,7 +23,7 @@ for (i in 1:length(filenets)){
   netmat = data.matrix(netcurr2[,-c(1)], rownames.force = NA)
   rownames(netmat)= netcurr2$ID
   
-  minrow=300
+  minrow=300 #minimum number of leaves
   
   netpro=NULL
   allnames=cbind(rownames(netmat),0)
