@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/355561540.svg)](https://zenodo.org/badge/latestdoi/355561540)
+
 # Scars on fossil leaves: An exploration of ecological patterns in plant–insect herbivore associations during the Age of Angiosperms #
 **Team members:** Ellen D. Currano<sup>a,b </sup>, Lauren E. Azevedo-Schmidt<sup>a</sup>, S. Augusta Maccracken<sup>c,d</sup>, and Anshuman Swain<sup>e</sup>
 
@@ -7,4 +9,3 @@
 
 **Keywords:** Paleoherbivory, Damage Type classification
 
-<This is only a filler fo rnow...we can update it later>
